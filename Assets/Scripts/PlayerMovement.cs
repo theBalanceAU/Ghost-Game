@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody2D myRigidBody;
     CapsuleCollider2D myBodyCollider;
+    Animator myAnimator;
 
     Vector2 moveInput;
     bool isAlive;
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     {
         myRigidBody = GetComponent<Rigidbody2D>();
         myBodyCollider = GetComponent<CapsuleCollider2D>();
+        myAnimator = GetComponent<Animator>();
     }
 
     void Start()
@@ -28,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
         isAlive = true;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         MovePlayer();
     }
@@ -52,6 +54,16 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 playerVelocity = new Vector2(moveInput.x * runSpeed, moveInput.y * runSpeed);
         myRigidBody.velocity = playerVelocity;
+
+        bool isMovingHorizontal = (playerVelocity.x > Mathf.Epsilon) || (playerVelocity.x < -Mathf.Epsilon);
+        bool isMovingVertical = (playerVelocity.y > Mathf.Epsilon) || (playerVelocity.y < -Mathf.Epsilon);
+
+        Debug.Log($"x={playerVelocity.x}, y={playerVelocity.y}");
+        Debug.Log($"isMovingHorizontal={isMovingHorizontal}, isMovingVertical={isMovingVertical}");
+
+        myAnimator.SetBool("isWalking", isMovingHorizontal || isMovingVertical);
+        myAnimator.SetFloat("xVelocity", playerVelocity.x);
+        myAnimator.SetFloat("yVelocity", playerVelocity.y);
     }
 
     
