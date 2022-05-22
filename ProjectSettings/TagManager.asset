@@ -53,3 +53,6 @@ TagManager:
   - name: Forground
     uniqueID: 885061377
     locked: 0
+  - name: Interactables
+    uniqueID: 4088656527
+    locked: 0

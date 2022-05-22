@@ -58,8 +58,8 @@ public class PlayerMovement : MonoBehaviour
         bool isMovingHorizontal = (playerVelocity.x > Mathf.Epsilon) || (playerVelocity.x < -Mathf.Epsilon);
         bool isMovingVertical = (playerVelocity.y > Mathf.Epsilon) || (playerVelocity.y < -Mathf.Epsilon);
 
-        Debug.Log($"x={playerVelocity.x}, y={playerVelocity.y}");
-        Debug.Log($"isMovingHorizontal={isMovingHorizontal}, isMovingVertical={isMovingVertical}");
+        // Debug.Log($"x={playerVelocity.x}, y={playerVelocity.y}");
+        // Debug.Log($"isMovingHorizontal={isMovingHorizontal}, isMovingVertical={isMovingVertical}");
 
         myAnimator.SetBool("isWalking", isMovingHorizontal || isMovingVertical);
         myAnimator.SetFloat("xVelocity", playerVelocity.x);
