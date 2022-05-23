@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     Vector2 moveInput;
     bool isAlive;
 
-    // events
+    // Unity Events
 
     void Awake()
     {
@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
         MovePlayer();
     }
 
+    // Player Input events
+
     void OnMove(InputValue value)
     {
         if (!isAlive)
@@ -43,7 +45,12 @@ public class PlayerMovement : MonoBehaviour
         moveInput = isAlive ? value.Get<Vector2>() : new Vector2(0, 0);
     }
 
-    // private methods
+    void OnInteract(InputValue value)
+    {
+
+    }
+
+    // Private methods
 
     void MovePlayer()
     {

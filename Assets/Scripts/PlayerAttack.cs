@@ -5,37 +5,19 @@ using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
+    [Header("Attack")]
     [SerializeField] float attackCooldown = 1f;
     [SerializeField] float attackRange = 1f;
     [SerializeField] Transform attackPosition;
-    [SerializeField] LayerMask enemyMask;
+    [SerializeField] LayerMask attackLayerMask;
 
     float timeSinceLastAttack = 0f;
 
-    // Update is called once per frame
+    // Unity events
+
     void Update()
     {
         timeSinceLastAttack += Time.deltaTime;
-    }
-
-    void OnFire(InputValue value)
-    {
-        if (timeSinceLastAttack >= attackCooldown)
-        {
-            ScareAttack();
-            timeSinceLastAttack = 0f;
-        }
-    }
-
-    void ScareAttack()
-    {
-        Debug.Log("BOO!");
-
-        Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, enemyMask);
-        foreach (var enemy in enemiesInRange)
-        {
-            Debug.Log($"{enemy.name} is scared");
-        }
     }
 
     void OnDrawGizmosSelected()
@@ -46,4 +28,30 @@ public class PlayerAttack : MonoBehaviour
             Gizmos.DrawWireSphere(attackPosition.position, attackRange);
         }
     }
+
+    // Player Input events
+
+    void OnFire(InputValue value)
+    {
+        if (timeSinceLastAttack >= attackCooldown)
+        {
+            ScareAttack();
+            timeSinceLastAttack = 0f;
+        }
+    }
+
+
+    // Private methods
+
+    void ScareAttack()
+    {
+        Debug.Log("BOO!");
+
+        Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, attackLayerMask);
+        foreach (var enemy in enemiesInRange)
+        {
+            Debug.Log($"{enemy.name} is scared");
+        }
+    }
+
 }
