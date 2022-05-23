@@ -20,8 +20,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
-        myRigidBody = GetComponentInChildren<Rigidbody2D>();
-        myBodyCollider = GetComponentInChildren<CapsuleCollider2D>();
+        myRigidBody = GetComponent<Rigidbody2D>();
+        myBodyCollider = GetComponent<CapsuleCollider2D>();
         myAnimator = GetComponentInChildren<Animator>();
     }
 
@@ -41,11 +41,6 @@ public class PlayerMovement : MonoBehaviour
             return;
 
         moveInput = isAlive ? value.Get<Vector2>() : new Vector2(0, 0);
-    }
-
-    void OnFire(InputValue value)
-    {
-        Debug.Log("BOO!");
     }
 
     // private methods
