@@ -20,9 +20,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
-        myRigidBody = GetComponent<Rigidbody2D>();
-        myBodyCollider = GetComponent<CapsuleCollider2D>();
-        myAnimator = GetComponent<Animator>();
+        myRigidBody = GetComponentInChildren<Rigidbody2D>();
+        myBodyCollider = GetComponentInChildren<CapsuleCollider2D>();
+        myAnimator = GetComponentInChildren<Animator>();
     }
 
     void Start()
