@@ -47,6 +47,9 @@ TagManager:
   - name: Obstacles
     uniqueID: 1072854403
     locked: 0
+  - name: Decoration
+    uniqueID: 2998689265
+    locked: 0
   - name: Player
     uniqueID: 50086199
     locked: 0
