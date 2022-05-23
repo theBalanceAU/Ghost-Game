@@ -10,6 +10,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float attackRange = 1f;
     [SerializeField] Transform attackPosition;
     [SerializeField] LayerMask attackLayerMask;
+    [SerializeField] ParticleSystem attackParticleEffect;
 
     float timeSinceLastAttack = 0f;
 
@@ -46,6 +47,10 @@ public class PlayerAttack : MonoBehaviour
     void ScareAttack()
     {
         Debug.Log("BOO!");
+        if (attackParticleEffect)
+        {
+            attackParticleEffect.Play();
+        }
 
         Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, attackLayerMask);
         foreach (var enemy in enemiesInRange)
