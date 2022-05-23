@@ -47,15 +47,14 @@ public class PlayerAttack : MonoBehaviour
     void ScareAttack()
     {
         Debug.Log("BOO!");
-        if (attackParticleEffect)
-        {
-            attackParticleEffect.Play();
-        }
+        attackParticleEffect?.Play();
 
         Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, attackLayerMask);
         foreach (var enemy in enemiesInRange)
         {
-            Debug.Log($"{enemy.name} is scared");
+            Debug.Log($"{enemy.name} heard you say BOO!");
+            EnemyBehavior e = enemy.GetComponent<EnemyBehavior>();
+            e.Scare(transform);
         }
     }
 
