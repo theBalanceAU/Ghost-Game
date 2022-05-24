@@ -20,6 +20,12 @@ public class InteractTrigger : MonoBehaviour
     [SerializeField] GameObject sourceObject;
     [SerializeField] bool destroyObjectOnPickup;
     
+    PlayerInteraction playerInteraction;
+
+    void Awake()
+    {
+        playerInteraction = FindObjectOfType<PlayerInteraction>();
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -60,6 +66,12 @@ public class InteractTrigger : MonoBehaviour
         if (playSound && soundClip)
         {
             AudioSource.PlayClipAtPoint(soundClip, Camera.main.transform.position);
+        }
+
+        if (pickupObject && sourceObject)
+        {
+            Debug.Log($"Pickup object {sourceObject.name}");
+            playerInteraction?.PickupObject(sourceObject);
         }
     }
 }

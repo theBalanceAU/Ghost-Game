@@ -5,12 +5,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteraction : MonoBehaviour
 {
+    [SerializeField] GameObject heldObjectContainer;
+
     Rigidbody2D myRigidBody;
     CapsuleCollider2D myBodyCollider;
     Animator myAnimator;
 
-    // public for testing only - change to private later
-    public GameObject interaction;
+    GameObject interactableObject;
+    GameObject heldObject;
+
 
     // Unity Events
 
@@ -25,16 +28,16 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Interaction"))
         {
-            interaction = other.gameObject;
+            interactableObject = other.gameObject;
         }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Interaction") && interaction == other.gameObject)
+        if (other.gameObject.CompareTag("Interaction") && interactableObject == other.gameObject)
         {
             // Clear the interactable object that we have moved away from
-            interaction = null;
+            interactableObject = null;
         }
     }
 
@@ -42,16 +45,37 @@ public class PlayerInteraction : MonoBehaviour
 
     void OnInteract(InputValue value)
     {
-        Debug.Log("Interact");
-
-        if (!interaction)
-            return;
-
-        Debug.Log($"{interaction.name}");
-        InteractTrigger trigger = interaction.GetComponent<InteractTrigger>();
-        if (trigger)
+        if (heldObject)
         {
-            trigger.DoInteraction();
+            Debug.Log($"Throw: {heldObject.name}");
+            Destroy(heldObject);
+            myAnimator.SetBool("isCarrying", false);
         }
+        else if (interactableObject)
+        {
+            Debug.Log($"Interaction: {interactableObject.name}");
+            InteractTrigger interaction = interactableObject.GetComponent<InteractTrigger>();
+            if (interaction)
+            {
+                interaction.DoInteraction();
+            }
+        }
+    }
+
+    public void PickupObject(GameObject pickup)
+    {
+        heldObject = pickup;
+
+        // move object into a child container of the player
+        pickup.transform.SetParent(heldObjectContainer.transform);
+        pickup.transform.localPosition = new Vector2(0f, 0f);
+
+        // disable collider and interaction trigger
+        pickup.GetComponent<Collider2D>().enabled = false;
+        pickup.GetComponentInChildren<InteractTrigger>().enabled = false;
+
+        // play animations for pickup and carry
+        myAnimator.SetTrigger("Pickup");
+        myAnimator.SetBool("isCarrying", true);
     }
 }

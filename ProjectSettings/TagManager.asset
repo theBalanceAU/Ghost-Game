@@ -52,6 +52,9 @@ TagManager:
   - name: Decoration
     uniqueID: 2998689265
     locked: 0
+  - name: Enemy
+    uniqueID: 3770065717
+    locked: 0
   - name: Interactables
     uniqueID: 4088656527
     locked: 0
