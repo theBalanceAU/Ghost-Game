@@ -45,26 +45,6 @@ public class PlayerMovement : MonoBehaviour
         moveInput = isAlive ? value.Get<Vector2>() : new Vector2(0, 0);
     }
 
-    void OnInteract(InputValue value)
-    {
-        Debug.Log("Interact");
-        List<Collider2D> overlapping = new List<Collider2D>();
-        ContactFilter2D filter = new ContactFilter2D();
-        int overlapCount = myBodyCollider.OverlapCollider(filter, overlapping);
-
-        Debug.Log($"{overlapCount} overlapping triggers found");
-
-        foreach (var collider in overlapping)
-        {
-            Debug.Log($"{collider.gameObject.name}");
-            InteractTrigger trigger = collider.GetComponent<InteractTrigger>();
-            if (trigger)
-            {
-                trigger.DoTrigger();
-            }
-        }
-    }
-
     // Private methods
 
     void MovePlayer()

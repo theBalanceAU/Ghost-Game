@@ -23,7 +23,7 @@ public class InteractTrigger : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             // show prompt for interact button?
             Debug.Log("Press [interact] button");
@@ -32,15 +32,17 @@ public class InteractTrigger : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             // hide prompt
             Debug.Log("Player out of trigger zone");
         }
     }
 
-    public void DoTrigger()
+    public void DoInteraction()
     {
+        Debug.Log($"DoInteraction()");
+
         if (loadScene && !string.IsNullOrEmpty(sceneName))
         {
             Debug.Log($"LOAD SCENE {sceneName}");
@@ -53,6 +55,11 @@ public class InteractTrigger : MonoBehaviour
                 //SceneManager.LoadSceneAsync(sceneName);
             }
             
+        }
+
+        if (playSound && soundClip)
+        {
+            AudioSource.PlayClipAtPoint(soundClip, Camera.main.transform.position);
         }
     }
 }
