@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
-public class InteractTrigger : MonoBehaviour
+public class Interaction : MonoBehaviour
 {
     [Header("Load Scene")]
     [SerializeField] bool loadScene;
@@ -17,8 +17,6 @@ public class InteractTrigger : MonoBehaviour
 
     [Header("Pickup Object")]
     [SerializeField] bool pickupObject;
-    [SerializeField] GameObject sourceObject;
-    [SerializeField] bool destroyObjectOnPickup;
     
     PlayerInteraction playerInteraction;
 
@@ -32,7 +30,7 @@ public class InteractTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // show prompt for interact button?
-            Debug.Log("Press [interact] button");
+            // Debug.Log("Press [interact] button");
         }
     }
 
@@ -40,12 +38,19 @@ public class InteractTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // hide prompt
-            Debug.Log("Player out of trigger zone");
+            // hide interaction prompt
+            // Debug.Log("Player out of trigger zone");
         }
     }
 
-    public void DoInteraction()
+    void OnDrawGizmos()
+    {
+        BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(transform.position, boxCollider.size);
+    }
+
+    public void DoInteraction(PlayerInteraction other)
     {
         Debug.Log($"DoInteraction()");
 
@@ -55,11 +60,14 @@ public class InteractTrigger : MonoBehaviour
             if (delaySceneLoad > 0)
             {
                 Debug.Log($"Delay for {delaySceneLoad} seconds");
+                //TODO: Create SceneManager to open scene with optional delay and transition effects
             }
             else
             {
-                //SceneManager.LoadSceneAsync(sceneName);
+                
             }
+
+            SceneManager.LoadSceneAsync(sceneName);
             
         }
 
@@ -68,10 +76,13 @@ public class InteractTrigger : MonoBehaviour
             AudioSource.PlayClipAtPoint(soundClip, Camera.main.transform.position);
         }
 
-        if (pickupObject && sourceObject)
+        if (pickupObject)
         {
-            Debug.Log($"Pickup object {sourceObject.name}");
-            playerInteraction?.PickupObject(sourceObject);
+            GameObject pickup = transform.parent.gameObject;
+
+            Debug.Log($"Pickup object {pickup.name}");
+
+            other.PickupObject(pickup);
         }
     }
 }
