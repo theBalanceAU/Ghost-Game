@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -1440,8 +1440,8 @@ TextureImporter:
       character-ghost_8: -324331280
       character-ghost_11: -1976491849
       character-ghost_32: -1061395176
-      character-ghost_34: -116706691
       character-ghost_23: 1772168823
+      character-ghost_34: -116706691
       character-ghost_67: -1332933871
       character-ghost_9: 110336535
       character-ghost_48: 1575778779

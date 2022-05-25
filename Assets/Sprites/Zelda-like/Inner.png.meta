@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -5787,11 +5787,11 @@ TextureImporter:
       Inner_229: -668006902
       Inner_31: -1331694244
       Inner_154: -1545055462
-      Inner_13: 30854145
+      Inner_53: -1341316580
       Inner_38: 554641284
       Inner_56: 1401050319
       Inner_250: -1371177336
-      Inner_53: -1341316580
+      Inner_13: 30854145
       Inner_247: -1579395214
       Inner_151: 969506761
       Inner_14: -900230244

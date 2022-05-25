@@ -19,10 +19,12 @@ public class Interaction : MonoBehaviour
     [SerializeField] bool pickupObject;
     
     PlayerInteraction playerInteraction;
+    GameManager gameManager;
 
     void Awake()
     {
         playerInteraction = FindObjectOfType<PlayerInteraction>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -31,6 +33,9 @@ public class Interaction : MonoBehaviour
         {
             // show prompt for interact button?
             // Debug.Log("Press [interact] button");
+            
+            gameManager.SetUIHintActive(true);
+            gameManager.SetUIHint("Interact", name);
         }
     }
 
@@ -40,6 +45,8 @@ public class Interaction : MonoBehaviour
         {
             // hide interaction prompt
             // Debug.Log("Player out of trigger zone");
+
+            gameManager.SetUIHintActive(false);
         }
     }
 
