@@ -102,16 +102,19 @@ public class PlayerInteraction : MonoBehaviour
         if (!heldObject)
             return;
 
-        Debug.Log($"Throwing: {heldObject.name}");
+        // Debug.Log($"Throwing: {heldObject.name}");
 
-        // remove from holding slot on player
-        heldObject.transform.SetParent(null);
+        ThrowableObject thing = heldObject.GetComponent<ThrowableObject>();
+        thing.ThrowObject(throwSpeed, throwDuration);
 
-        // enable the collider again
-        heldObject.GetComponent<Collider2D>().enabled = true;
+        // // remove from holding slot on player
+        // heldObject.transform.SetParent(null);
 
-        // yeet it
-        StartCoroutine(Throw(heldObject));
+        // // enable the collider again
+        // heldObject.GetComponent<Collider2D>().enabled = true;
+
+        // // yeet it
+        // StartCoroutine(Throw(heldObject));
 
         // clear the reference so we are no longer holding this object
         heldObject = null;
@@ -120,17 +123,17 @@ public class PlayerInteraction : MonoBehaviour
         myAnimator.SetBool("isCarrying", false);
     }
 
-    IEnumerator Throw(GameObject item)
-    {
-        Vector2 startPoint = item.transform.position;
-        Vector2 velocity = Vector2.right * throwSpeed;
+    // IEnumerator Throw(GameObject item)
+    // {
+    //     Vector2 startPoint = item.transform.position;
+    //     Vector2 velocity = Vector2.right * throwSpeed;
 
-        item.GetComponent<Rigidbody2D>().velocity = velocity;
+    //     item.GetComponent<Rigidbody2D>().velocity = velocity;
 
-        yield return new WaitForSeconds(throwDuration);
+    //     yield return new WaitForSeconds(throwDuration);
         
-        // for now, just stop the object and enable interaction again
-        item.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        item.GetComponentInChildren<Interaction>().gameObject.SetActive(true);
-    }
+    //     // for now, just stop the object and enable interaction again
+    //     item.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+    //     item.GetComponentInChildren<Interaction>().gameObject.SetActive(true);
+    // }
 }

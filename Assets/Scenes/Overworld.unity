@@ -40080,7 +40080,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5391218208111969656, guid: c6108127acf022a4cbeb55d990699b8f, type: 3}
       propertyPath: playerPosition.y
-      value: 1.5
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5391218208111969656, guid: c6108127acf022a4cbeb55d990699b8f, type: 3}
       propertyPath: setPlayerPosition
@@ -57763,11 +57763,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 917524273032115755, guid: a2b23ec0c15e3ee4cb21a9dd9095f57c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.42
+      value: 0.44
       objectReference: {fileID: 0}
     - target: {fileID: 917524273032115755, guid: a2b23ec0c15e3ee4cb21a9dd9095f57c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.35
+      value: -4.7
       objectReference: {fileID: 0}
     - target: {fileID: 917524273395742036, guid: a2b23ec0c15e3ee4cb21a9dd9095f57c, type: 3}
       propertyPath: m_RootOrder
@@ -57827,11 +57827,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 917524274146804124, guid: a2b23ec0c15e3ee4cb21a9dd9095f57c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.42
+      value: 0.44
       objectReference: {fileID: 0}
     - target: {fileID: 917524274146804124, guid: a2b23ec0c15e3ee4cb21a9dd9095f57c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.35
+      value: -4.7
       objectReference: {fileID: 0}
     - target: {fileID: 917524274146804125, guid: a2b23ec0c15e3ee4cb21a9dd9095f57c, type: 3}
       propertyPath: m_Follow
@@ -57987,6 +57987,10 @@ PrefabInstance:
     - target: {fileID: 5391218208111969656, guid: c6108127acf022a4cbeb55d990699b8f, type: 3}
       propertyPath: delaySceneLoad
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5391218208111969656, guid: c6108127acf022a4cbeb55d990699b8f, type: 3}
+      propertyPath: playerPosition.y
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5391218208111969656, guid: c6108127acf022a4cbeb55d990699b8f, type: 3}
       propertyPath: setPlayerPosition
@@ -58364,11 +58368,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8465859729271875275, guid: 90e5929475f08e9448d568a6ea0d9b0a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.42
+      value: 0.44
       objectReference: {fileID: 0}
     - target: {fileID: 8465859729271875275, guid: 90e5929475f08e9448d568a6ea0d9b0a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.35
+      value: -4.7
       objectReference: {fileID: 0}
     - target: {fileID: 8465859729271875275, guid: 90e5929475f08e9448d568a6ea0d9b0a, type: 3}
       propertyPath: m_LocalPosition.z

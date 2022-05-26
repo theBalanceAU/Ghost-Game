@@ -93,14 +93,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetPlayerSpawnPosition(Vector2 position)
+    public void SetPlayerSpawn(Vector2 position)
     {
         playerSpawn = position;
     }
 
-    public Vector2 GetPlayerSpawnPosition()
+    public Vector2 GetPlayerSpawn()
     {
         return playerSpawn;
+    }
+
+    public bool IsPlayerSpawnOverride()
+    {
+        return !playerSpawn.Equals(Vector2.zero);
     }
 
     public void ChangeScene(string sceneName, float delaySceneLoad)

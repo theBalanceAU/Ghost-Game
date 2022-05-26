@@ -13,6 +13,8 @@ public class ThrowableObject : MonoBehaviour
 
     GameObject holder;
 
+    bool isThrown;
+
     void Awake()
     {
         myCollider = GetComponent<CircleCollider2D>();
@@ -24,6 +26,12 @@ public class ThrowableObject : MonoBehaviour
     private void Start()
     {
         interactTrigger = FindObjectOfType<Interaction>()?.gameObject;
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (isThrown)
+            Debug.Log($"Hit {other.gameObject.name}");
     }
 
     public void PickupObject(GameObject owner)
@@ -60,10 +68,12 @@ public class ThrowableObject : MonoBehaviour
 
     public void ThrowObject(float throwSpeed, float throwDuration)
     {
-        if (!holder)
-            return;
+        // if (!holder)
+        //     return;
 
         Debug.Log($"Throwing: {name}");
+
+        isThrown = true;
 
         // remove from holding slot on player
         transform.SetParent(null);
@@ -93,5 +103,7 @@ public class ThrowableObject : MonoBehaviour
         // for now, just stop the object and enable interaction again
         myRigidBody.velocity = Vector2.zero;
         interactTrigger.SetActive(true);
+
+        Destroy(gameObject);
     }
 }

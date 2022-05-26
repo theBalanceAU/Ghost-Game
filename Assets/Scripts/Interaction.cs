@@ -63,7 +63,12 @@ public class Interaction : MonoBehaviour
             GameManager.Instance.SetUIHintActive(false);
 
             Debug.Log($"LOAD SCENE {sceneName}");
-            GameManager.Instance.SetPlayerSpawnPosition(playerPosition);
+
+            if (setPlayerPosition)
+                GameManager.Instance.SetPlayerSpawn(playerPosition);
+            else
+                GameManager.Instance.SetPlayerSpawn(Vector2.zero);
+
             GameManager.Instance.ChangeScene(sceneName, delaySceneLoad);
         }
 

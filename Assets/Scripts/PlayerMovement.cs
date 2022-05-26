@@ -16,8 +16,6 @@ public class PlayerMovement : MonoBehaviour
     Vector2 moveInput;
     bool isAlive;
 
-    bool isInitialized;
-
     // Unity Events
 
     void Awake()
@@ -31,10 +29,8 @@ public class PlayerMovement : MonoBehaviour
     {
         isAlive = true;
 
-        if (isInitialized)
-            transform.position = GameManager.Instance.GetPlayerSpawnPosition();
-
-        isInitialized = true;
+        if (GameManager.Instance.IsPlayerSpawnOverride())
+            transform.position = GameManager.Instance.GetPlayerSpawn();
     }
 
     void FixedUpdate()
