@@ -31,7 +31,7 @@ public class Interaction : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // show prompt for interact
+            // show prompt for interaction
             GameManager.Instance.SetUIHintActive(true);
             GameManager.Instance.SetUIHint("Interact", name);
         }
@@ -54,15 +54,13 @@ public class Interaction : MonoBehaviour
         Gizmos.DrawWireCube(transform.position, boxCollider.size);
     }
 
-    public void DoInteraction(PlayerInteraction other)
+    public void DoInteraction()
     {
-        Debug.Log($"DoInteraction()");
-
         if (loadScene && !string.IsNullOrEmpty(sceneName))
         {
-            GameManager.Instance.SetUIHintActive(false);
+            Debug.Log($"Load Scene {sceneName}");
 
-            Debug.Log($"LOAD SCENE {sceneName}");
+            GameManager.Instance.SetUIHintActive(false);
 
             if (setPlayerPosition)
                 GameManager.Instance.SetPlayerSpawn(playerPosition);
@@ -80,10 +78,8 @@ public class Interaction : MonoBehaviour
         if (pickupObject)
         {
             GameObject pickup = transform.parent.gameObject;
-
             Debug.Log($"Pickup object {pickup.name}");
-
-            other.PickupObject(pickup);
+            playerInteraction.PickupObject(pickup);
         }
     }
 }

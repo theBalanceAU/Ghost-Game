@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] Transform attackPosition;
     [SerializeField] LayerMask attackLayerMask;
     [SerializeField] ParticleSystem attackParticleEffect;
+    [SerializeField] AudioClip attackSoundEffect;
 
     float timeSinceLastAttack = 0f;
 
@@ -48,6 +49,9 @@ public class PlayerAttack : MonoBehaviour
     {
         Debug.Log("BOO!");
         attackParticleEffect?.Play();
+
+        if (attackSoundEffect)
+            AudioSource.PlayClipAtPoint(attackSoundEffect, Camera.main.transform.position);
 
         Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, attackLayerMask);
         foreach (var enemy in enemiesInRange)

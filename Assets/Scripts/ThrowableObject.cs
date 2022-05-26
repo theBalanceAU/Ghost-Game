@@ -11,9 +11,12 @@ public class ThrowableObject : MonoBehaviour
     Animator myAnimator;
     GameObject interactTrigger;
 
+    [SerializeField] AudioClip hitSound;
+
     GameObject holder;
 
     bool isThrown;
+    bool isDestroyed;
 
     void Awake()
     {
@@ -28,30 +31,50 @@ public class ThrowableObject : MonoBehaviour
         interactTrigger = FindObjectOfType<Interaction>()?.gameObject;
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (isThrown)
         {
             if (other.transform.CompareTag("Wall"))
             {
                 Debug.Log($"{name} hit a wall!");
+                isDestroyed = true;
             }
             else if (other.transform.CompareTag("Enemy"))
             {
                 Debug.Log($"{name} hit an enamy ({other.transform.name})!");
+                isDestroyed = true;
             }
             else if (other.transform.CompareTag("Pickup"))
             {
                 Debug.Log($"{name} hit another pickup ({other.transform.name})!");
+                isDestroyed = true;
             }
 
-            myRigidBody.velocity = Vector2.zero;
-            myAnimator.SetTrigger("Break");
-            //Destroy(gameObject);
+            if (isDestroyed)
+            {
+                StartCoroutine(BreakMe());
+            }
         }
     }
 
-    public void PickupObject(GameObject owner, Transform parent)
+    IEnumerator BreakMe()
+    {
+        isDestroyed = true;
+        myCollider.enabled = false;
+        myRigidBody.velocity = Vector2.zero;
+        myAnimator.SetTrigger("Break");
+
+        AudioSource.PlayClipAtPoint(hitSound, Camera.main.transform.position);
+        
+        yield return new WaitForSeconds(1f);
+
+        Destroy(gameObject);
+    }
+
+
+
+    public void BindToPlayer(GameObject owner, Transform parent)
     {
         holder = owner;
 
@@ -84,7 +107,7 @@ public class ThrowableObject : MonoBehaviour
         // if using this later - make sure to set animation state back to idle as the appearance is slightly different
     }
 
-    public void ThrowObject(float throwSpeed, float throwDuration)
+    public void ThrowObject(Vector2 direction, float throwSpeed, float throwDuration)
     {
         Debug.Log($"ThrowableObject Throwing: {name}");
 
@@ -97,23 +120,27 @@ public class ThrowableObject : MonoBehaviour
         // enable the collider again
         myCollider.enabled = true;
 
+        // make it a trigger so it doesn't accidentally knock anything around
+        myCollider.isTrigger = true;
+
         // yeet it
-        StartCoroutine(Yeet(throwSpeed, throwDuration));
+        StartCoroutine(Yeet(direction, throwSpeed, throwDuration));
     }
 
-    IEnumerator Yeet(float throwSpeed, float throwDuration)
+    IEnumerator Yeet(Vector2 direction, float throwSpeed, float throwDuration)
     {
         Vector2 startPoint = transform.position;
-        Vector2 velocity = Vector2.right * throwSpeed;
+        Vector2 velocity = direction * throwSpeed;
 
         myRigidBody.velocity = velocity;
 
         yield return new WaitForSeconds(throwDuration);
         
-        // for now, just stop the object and enable interaction again
-        myRigidBody.velocity = Vector2.zero;
-        interactTrigger.SetActive(true);
-
-        Destroy(gameObject);
+        // if thrown to max distance and it's still intact, break it
+        if (!isDestroyed)
+        {
+            Debug.Log($"Max distance reached. Breaking {name}.");
+            yield return BreakMe();
+        }
     }
 }

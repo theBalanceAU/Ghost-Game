@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     Vector2 moveInput;
     bool isAlive;
 
+    public Vector2 facing;
+
     // Unity Events
 
     void Awake()
@@ -28,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         isAlive = true;
+        facing = Vector2.down;
 
         if (GameManager.Instance.IsPlayerSpawnOverride())
             transform.position = GameManager.Instance.GetPlayerSpawn();
@@ -67,15 +70,15 @@ public class PlayerMovement : MonoBehaviour
 
         if (isMovingHorizontal)
         {
-            float xFacing = playerVelocity.x > 0 ? 1 : -1;
-            myAnimator.SetFloat("xFacing", xFacing);
-            myAnimator.SetFloat("yFacing", 0f);
+            facing = playerVelocity.x > 0 ? Vector2.right : Vector2.left;
+            myAnimator.SetFloat("xFacing", facing.x);
+            myAnimator.SetFloat("yFacing", facing.y);
         }
         else if (isMovingVertical)
         {
-            float yFacing = playerVelocity.y > 0 ? 1 : -1;
-            myAnimator.SetFloat("xFacing", 0f);
-            myAnimator.SetFloat("yFacing", yFacing);
+            facing = playerVelocity.y > 0 ? Vector2.up : Vector2.down;
+            myAnimator.SetFloat("xFacing", facing.x);
+            myAnimator.SetFloat("yFacing", facing.y);
         }
     }
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1877525975}
   - component: {fileID: 1877525977}
   - component: {fileID: 1877525976}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BOO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4838,7 +4838,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 50086199
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -4879,10 +4879,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 339819074169771680}
-  m_Layer: 0
-  m_Name: HeldObject
+  m_Layer: 9
+  m_Name: HoldPosition
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4916,7 +4916,7 @@ GameObject:
   - component: {fileID: 8465859729271875276}
   - component: {fileID: 8465859729271875278}
   - component: {fileID: 7243207280260361624}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -5021,6 +5021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runSpeed: 4
+  facing: {x: 0, y: 0}
 --- !u!114 &8465859729271875278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5040,6 +5041,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   attackParticleEffect: {fileID: 1877525977}
+  attackSoundEffect: {fileID: 8300000, guid: c3750829a25970a47ba06bf6d77dfa71, type: 3}
 --- !u!114 &7243207280260361624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5053,7 +5055,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heldObjectContainer: {fileID: 7357140711749439520}
-  interactableObject: {fileID: 0}
+  throwSpeed: 10
+  throwDuration: 0.5
 --- !u!1001 &3149664913169548112
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5108,6 +5111,10 @@ PrefabInstance:
     - target: {fileID: 6830022318495753585, guid: 3e27b51c6752c0a45a1cf1a0ccbfb835, type: 3}
       propertyPath: m_Name
       value: Ghost Boi
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830022318495753585, guid: 3e27b51c6752c0a45a1cf1a0ccbfb835, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e27b51c6752c0a45a1cf1a0ccbfb835, type: 3}

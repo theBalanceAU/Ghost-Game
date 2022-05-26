@@ -9,6 +9,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] float throwSpeed = 10f;
     [SerializeField] float throwDuration = 0.5f;
 
+    PlayerMovement playerMovement;
     Rigidbody2D myRigidBody;
     CapsuleCollider2D myBodyCollider;
     Animator myAnimator;
@@ -20,6 +21,7 @@ public class PlayerInteraction : MonoBehaviour
 
     void Awake()
     {
+        playerMovement = GetComponent<PlayerMovement>();
         myRigidBody = GetComponent<Rigidbody2D>();
         myBodyCollider = GetComponent<CapsuleCollider2D>();
         myAnimator = GetComponentInChildren<Animator>();
@@ -48,7 +50,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (throwableObject)
         {
-            throwableObject.ThrowObject(throwSpeed, throwDuration);
+            ThrowHeldObject();
         }
         else if (interactableObject)
         {
@@ -56,7 +58,7 @@ public class PlayerInteraction : MonoBehaviour
             Interaction interaction = interactableObject.GetComponent<Interaction>();
             if (interaction)
             {
-                interaction.DoInteraction(this);
+                interaction.DoInteraction();
             }
         }
     }
@@ -71,15 +73,7 @@ public class PlayerInteraction : MonoBehaviour
             return;
         }
 
-        throwableObject.PickupObject(gameObject, heldObjectContainer.transform);
-
-        // // move object into a child container of the player
-        // item.transform.SetParent(heldObjectContainer.transform);
-        // item.transform.localPosition = new Vector2(0f, 0f);
-
-        // // disable collider and interaction trigger
-        // item.GetComponent<Collider2D>().enabled = false;
-        // item.GetComponentInChildren<Interaction>().gameObject.SetActive(false);
+        throwableObject.BindToPlayer(gameObject, heldObjectContainer.transform);
 
         // trigger animations on player for pickup and carry
         myAnimator.SetTrigger("Pickup");
@@ -98,7 +92,7 @@ public class PlayerInteraction : MonoBehaviour
         if (!throwableObject)
             return;
 
-        throwableObject.ThrowObject(throwSpeed, throwDuration);
+        throwableObject.ThrowObject(playerMovement.facing, throwSpeed, throwDuration);
 
         // clear the local reference so we are no longer holding this object
         throwableObject = null;

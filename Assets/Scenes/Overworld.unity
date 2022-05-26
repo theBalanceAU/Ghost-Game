@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 38562178}
   - component: {fileID: 38562180}
   - component: {fileID: 38562179}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ground Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39615,7 +39615,7 @@ GameObject:
   - component: {fileID: 70988735}
   - component: {fileID: 70988737}
   - component: {fileID: 70988736}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Decoration Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40649,7 +40649,7 @@ GameObject:
   - component: {fileID: 1956845420}
   - component: {fileID: 1956845422}
   - component: {fileID: 1956845421}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shadows Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41138,7 +41138,7 @@ GameObject:
   - component: {fileID: 1973176610}
   - component: {fileID: 1973176609}
   - component: {fileID: 1973176608}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Obstacles Tilemap
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -57363,7 +57363,7 @@ GameObject:
   - component: {fileID: 2122617788}
   - component: {fileID: 2122617790}
   - component: {fileID: 2122617789}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Foreground Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58342,14 +58342,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7357140711749439520, guid: 90e5929475f08e9448d568a6ea0d9b0a, type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
-    - target: {fileID: 7357140711749439520, guid: 90e5929475f08e9448d568a6ea0d9b0a, type: 3}
-      propertyPath: m_Name
-      value: HoldPosition
-      objectReference: {fileID: 0}
     - target: {fileID: 8465859729271875274, guid: 90e5929475f08e9448d568a6ea0d9b0a, type: 3}
       propertyPath: m_Name
       value: Player
