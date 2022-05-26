@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,12 +19,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] Sprite fullHeartSprite;
     [SerializeField] Sprite[] partialHeartSprites;
 
-    GameObject[] hearts;
-
     static GameManager instance;
 
     const int healthPointsPerHeart = 4;
     const int initialHeartCount = 3;
+
+    Vector2 playerSpawn;
 
     public static GameManager Instance
     {
@@ -89,5 +91,35 @@ public class GameManager : MonoBehaviour
             }
             heartImage.sprite = heartSprite;
         }
+    }
+
+    public void SetPlayerSpawnPosition(Vector2 position)
+    {
+        playerSpawn = position;
+    }
+
+    public Vector2 GetPlayerSpawnPosition()
+    {
+        return playerSpawn;
+    }
+
+    public void ChangeScene(string sceneName, float delaySceneLoad)
+    {
+        StartCoroutine(ChangeSceneCo(sceneName, delaySceneLoad));
+    }
+
+    IEnumerator ChangeSceneCo(string sceneName, float delaySceneLoad)
+    {
+        // play crossfade animation (if one is present in the current scene)
+        SceneCrossfade crossFade = FindObjectOfType<SceneCrossfade>();
+        crossFade?.FadeOut();
+
+        if (delaySceneLoad > 0)
+        {
+            Debug.Log($"Delay for {delaySceneLoad} seconds");
+            yield return new WaitForSeconds(delaySceneLoad);
+        }
+
+        SceneManager.LoadSceneAsync(sceneName);
     }
 }

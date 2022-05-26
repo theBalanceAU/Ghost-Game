@@ -10,6 +10,8 @@ public class Interaction : MonoBehaviour
     [SerializeField] bool loadScene;
     [SerializeField] string sceneName;
     [SerializeField] float delaySceneLoad;
+    [SerializeField] bool setPlayerPosition;
+    [SerializeField] Vector2 playerPosition;
 
     [Header("Play Sound")]
     [SerializeField] bool playSound;
@@ -19,16 +21,10 @@ public class Interaction : MonoBehaviour
     [SerializeField] bool pickupObject;
     
     PlayerInteraction playerInteraction;
-    // public GameManager gameManager;
 
     void Awake()
     {
         playerInteraction = FindObjectOfType<PlayerInteraction>();
-    }
-
-    void Start()
-    {
-        // gameManager = FindObjectOfType<GameManager>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -52,6 +48,7 @@ public class Interaction : MonoBehaviour
 
     void OnDrawGizmos()
     {
+        // draw a yellow box for things that the player can interact with
         BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(transform.position, boxCollider.size);
@@ -66,18 +63,8 @@ public class Interaction : MonoBehaviour
             GameManager.Instance.SetUIHintActive(false);
 
             Debug.Log($"LOAD SCENE {sceneName}");
-            if (delaySceneLoad > 0)
-            {
-                Debug.Log($"Delay for {delaySceneLoad} seconds");
-                //TODO: Create SceneManager to open scene with optional delay and transition effects
-            }
-            else
-            {
-                
-            }
-
-            SceneManager.LoadSceneAsync(sceneName);
-            
+            GameManager.Instance.SetPlayerSpawnPosition(playerPosition);
+            GameManager.Instance.ChangeScene(sceneName, delaySceneLoad);
         }
 
         if (playSound && soundClip)

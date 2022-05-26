@@ -27,16 +27,16 @@ public class EnemyBehavior : MonoBehaviour
 
     IEnumerator RunAndDisappear()
     {
-        Vector2 playerVelocity = new Vector2(1f, 1f);
+        Vector2 velocity = new Vector2(1f, 1f);
 
-        myRigidBody.velocity = playerVelocity;
+        myRigidBody.velocity = velocity;
 
-        bool isMovingHorizontal = (playerVelocity.x > Mathf.Epsilon) || (playerVelocity.x < -Mathf.Epsilon);
-        bool isMovingVertical = (playerVelocity.y > Mathf.Epsilon) || (playerVelocity.y < -Mathf.Epsilon);
+        bool isMovingHorizontal = (velocity.x > Mathf.Epsilon) || (velocity.x < -Mathf.Epsilon);
+        bool isMovingVertical = (velocity.y > Mathf.Epsilon) || (velocity.y < -Mathf.Epsilon);
 
         myAnimator?.SetBool("isWalking", isMovingHorizontal || isMovingVertical);
-        myAnimator?.SetFloat("xVelocity", playerVelocity.x);
-        myAnimator?.SetFloat("yVelocity", playerVelocity.y);
+        myAnimator?.SetFloat("xVelocity", velocity.x);
+        myAnimator?.SetFloat("yVelocity", velocity.y);
 
         yield return new WaitForSeconds(disappearAfterSeconds);
 
