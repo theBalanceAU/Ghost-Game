@@ -58066,10 +58066,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1594020167833363575, guid: 6421c2d071be01041a563f190c92ac4d, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: fa3e74aba9fc1c64497719ef886eec28, type: 2}
     - target: {fileID: 5871065543229230496, guid: 6421c2d071be01041a563f190c92ac4d, type: 3}
       propertyPath: m_Name
       value: Pot

@@ -64,6 +64,19 @@ public class PlayerMovement : MonoBehaviour
         myAnimator.SetBool("isWalking", isMovingHorizontal || isMovingVertical);
         myAnimator.SetFloat("xVelocity", playerVelocity.x);
         myAnimator.SetFloat("yVelocity", playerVelocity.y);
+
+        if (isMovingHorizontal)
+        {
+            float xFacing = playerVelocity.x > 0 ? 1 : -1;
+            myAnimator.SetFloat("xFacing", xFacing);
+            myAnimator.SetFloat("yFacing", 0f);
+        }
+        else if (isMovingVertical)
+        {
+            float yFacing = playerVelocity.y > 0 ? 1 : -1;
+            myAnimator.SetFloat("xFacing", 0f);
+            myAnimator.SetFloat("yFacing", yFacing);
+        }
     }
 
     

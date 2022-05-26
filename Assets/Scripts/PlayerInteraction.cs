@@ -14,7 +14,7 @@ public class PlayerInteraction : MonoBehaviour
     Animator myAnimator;
 
     GameObject interactableObject;
-    GameObject heldObject;
+    ThrowableObject throwableObject;
 
     // Unity Events
 
@@ -46,9 +46,9 @@ public class PlayerInteraction : MonoBehaviour
 
     void OnInteract(InputValue value)
     {
-        if (heldObject)
+        if (throwableObject)
         {
-            ThrowHeldObject();
+            throwableObject.ThrowObject(throwSpeed, throwDuration);
         }
         else if (interactableObject)
         {
@@ -63,77 +63,47 @@ public class PlayerInteraction : MonoBehaviour
 
     public void PickupObject(GameObject item)
     {
-        heldObject = item;
+        throwableObject = item.GetComponent<ThrowableObject>();
 
-        // move object into a child container of the player
-        item.transform.SetParent(heldObjectContainer.transform);
-        item.transform.localPosition = new Vector2(0f, 0f);
+        if (!throwableObject)
+        {
+            Debug.Log($"Could not pick up object {item.name}");
+            return;
+        }
 
-        // disable collider and interaction trigger
-        item.GetComponent<Collider2D>().enabled = false;
-        item.GetComponentInChildren<Interaction>().gameObject.SetActive(false);
+        throwableObject.PickupObject(gameObject, heldObjectContainer.transform);
 
-        // play animations for pickup and carry
+        // // move object into a child container of the player
+        // item.transform.SetParent(heldObjectContainer.transform);
+        // item.transform.localPosition = new Vector2(0f, 0f);
+
+        // // disable collider and interaction trigger
+        // item.GetComponent<Collider2D>().enabled = false;
+        // item.GetComponentInChildren<Interaction>().gameObject.SetActive(false);
+
+        // trigger animations on player for pickup and carry
         myAnimator.SetTrigger("Pickup");
         myAnimator.SetBool("isCarrying", true);
     }
 
     void DropHeldObject()
     {
-        if (!heldObject)
-            return;
-
-        Debug.Log($"Dropping: {heldObject.name}");
-
-        heldObject.transform.SetParent(null);
-
-        Vector2 startPoint = heldObject.transform.position;
-        Vector2 endPoint = new Vector2(heldObject.transform.position.x + 2f, heldObject.transform.position.y);
-
-        heldObject.GetComponent<Collider2D>().enabled = true;
-        heldObject.GetComponentInChildren<Interaction>().gameObject.SetActive(true);
-        heldObject = null;
-
+        throwableObject?.DropObject();
+        throwableObject = null;
         myAnimator.SetBool("isCarrying", false);
     }
 
     void ThrowHeldObject()
     {
-        if (!heldObject)
+        if (!throwableObject)
             return;
 
-        // Debug.Log($"Throwing: {heldObject.name}");
+        throwableObject.ThrowObject(throwSpeed, throwDuration);
 
-        ThrowableObject thing = heldObject.GetComponent<ThrowableObject>();
-        thing.ThrowObject(throwSpeed, throwDuration);
-
-        // // remove from holding slot on player
-        // heldObject.transform.SetParent(null);
-
-        // // enable the collider again
-        // heldObject.GetComponent<Collider2D>().enabled = true;
-
-        // // yeet it
-        // StartCoroutine(Throw(heldObject));
-
-        // clear the reference so we are no longer holding this object
-        heldObject = null;
+        // clear the local reference so we are no longer holding this object
+        throwableObject = null;
 
         // change player animation state
         myAnimator.SetBool("isCarrying", false);
     }
-
-    // IEnumerator Throw(GameObject item)
-    // {
-    //     Vector2 startPoint = item.transform.position;
-    //     Vector2 velocity = Vector2.right * throwSpeed;
-
-    //     item.GetComponent<Rigidbody2D>().velocity = velocity;
-
-    //     yield return new WaitForSeconds(throwDuration);
-        
-    //     // for now, just stop the object and enable interaction again
-    //     item.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-    //     item.GetComponentInChildren<Interaction>().gameObject.SetActive(true);
-    // }
 }

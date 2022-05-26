@@ -44,26 +44,27 @@ public class ThrowableObject : MonoBehaviour
             {
                 Debug.Log($"{name} hit another pickup ({other.transform.name})!");
             }
-            myAnimator.SetTrigger("hit");
-            Destroy(gameObject);
+
+            myRigidBody.velocity = Vector2.zero;
+            myAnimator.SetTrigger("Break");
+            //Destroy(gameObject);
         }
     }
 
-    public void PickupObject(GameObject owner)
+    public void PickupObject(GameObject owner, Transform parent)
     {
         holder = owner;
 
         // move object into a child container of the player
-        transform.SetParent(owner.transform);
+        transform.SetParent(parent);
         transform.localPosition = new Vector2(0f, 0f);
 
         // disable collider and interaction trigger
         myCollider.enabled = false;
         interactTrigger.SetActive(false);
 
-        // play animations for pickup and carry
-        // myAnimator.SetTrigger("Pickup");
-        // myAnimator.SetBool("isCarrying", true);
+        // change animation state to picked up
+        myAnimator.SetTrigger("Pickup");
     }
 
     public void DropObject()
@@ -78,17 +79,17 @@ public class ThrowableObject : MonoBehaviour
         myCollider.enabled = true;
         interactTrigger.SetActive(true);
 
-        // myAnimator.SetBool("isCarrying", false);
+        holder = null;
+
+        // if using this later - make sure to set animation state back to idle as the appearance is slightly different
     }
 
     public void ThrowObject(float throwSpeed, float throwDuration)
     {
-        // if (!holder)
-        //     return;
-
-        Debug.Log($"Throwing: {name}");
+        Debug.Log($"ThrowableObject Throwing: {name}");
 
         isThrown = true;
+        holder = null;
 
         // remove from holding slot on player
         transform.SetParent(null);
@@ -98,12 +99,6 @@ public class ThrowableObject : MonoBehaviour
 
         // yeet it
         StartCoroutine(Yeet(throwSpeed, throwDuration));
-
-        // clear the reference so we are no longer holding this object
-        // heldObject = null;
-
-        // change player animation state
-        // myAnimator.SetBool("isCarrying", false);
     }
 
     IEnumerator Yeet(float throwSpeed, float throwDuration)
