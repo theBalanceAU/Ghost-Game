@@ -31,7 +31,22 @@ public class ThrowableObject : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other)
     {
         if (isThrown)
-            Debug.Log($"Hit {other.gameObject.name}");
+        {
+            if (other.transform.CompareTag("Wall"))
+            {
+                Debug.Log($"{name} hit a wall!");
+            }
+            else if (other.transform.CompareTag("Enemy"))
+            {
+                Debug.Log($"{name} hit an enamy ({other.transform.name})!");
+            }
+            else if (other.transform.CompareTag("Pickup"))
+            {
+                Debug.Log($"{name} hit another pickup ({other.transform.name})!");
+            }
+            myAnimator.SetTrigger("hit");
+            Destroy(gameObject);
+        }
     }
 
     public void PickupObject(GameObject owner)

@@ -41140,7 +41140,7 @@ GameObject:
   - component: {fileID: 1973176608}
   m_Layer: 0
   m_Name: Obstacles Tilemap
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58066,6 +58066,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1594020167833363575, guid: 6421c2d071be01041a563f190c92ac4d, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: fa3e74aba9fc1c64497719ef886eec28, type: 2}
     - target: {fileID: 5871065543229230496, guid: 6421c2d071be01041a563f190c92ac4d, type: 3}
       propertyPath: m_Name
       value: Pot
@@ -58183,14 +58187,6 @@ PrefabInstance:
     - target: {fileID: 7228686424258733624, guid: f185bf91ea04bc341bcde0802d1393ba, type: 3}
       propertyPath: m_Name
       value: Dude
-      objectReference: {fileID: 0}
-    - target: {fileID: 7228686424258733625, guid: f185bf91ea04bc341bcde0802d1393ba, type: 3}
-      propertyPath: m_SortingLayer
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7228686424258733625, guid: f185bf91ea04bc341bcde0802d1393ba, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -524901579
       objectReference: {fileID: 0}
     - target: {fileID: 7228686424258733626, guid: f185bf91ea04bc341bcde0802d1393ba, type: 3}
       propertyPath: m_RootOrder
