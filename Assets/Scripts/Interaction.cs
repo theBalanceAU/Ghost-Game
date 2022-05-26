@@ -19,23 +19,25 @@ public class Interaction : MonoBehaviour
     [SerializeField] bool pickupObject;
     
     PlayerInteraction playerInteraction;
-    GameManager gameManager;
+    // public GameManager gameManager;
 
     void Awake()
     {
         playerInteraction = FindObjectOfType<PlayerInteraction>();
-        gameManager = FindObjectOfType<GameManager>();
+    }
+
+    void Start()
+    {
+        // gameManager = FindObjectOfType<GameManager>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            // show prompt for interact button?
-            // Debug.Log("Press [interact] button");
-            
-            gameManager.SetUIHintActive(true);
-            gameManager.SetUIHint("Interact", name);
+            // show prompt for interact
+            GameManager.Instance.SetUIHintActive(true);
+            GameManager.Instance.SetUIHint("Interact", name);
         }
     }
 
@@ -44,9 +46,7 @@ public class Interaction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // hide interaction prompt
-            // Debug.Log("Player out of trigger zone");
-
-            gameManager.SetUIHintActive(false);
+            GameManager.Instance.SetUIHintActive(false);
         }
     }
 
@@ -63,6 +63,8 @@ public class Interaction : MonoBehaviour
 
         if (loadScene && !string.IsNullOrEmpty(sceneName))
         {
+            GameManager.Instance.SetUIHintActive(false);
+
             Debug.Log($"LOAD SCENE {sceneName}");
             if (delaySceneLoad > 0)
             {
