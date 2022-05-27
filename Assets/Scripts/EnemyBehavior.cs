@@ -68,6 +68,8 @@ public class EnemyBehavior : MonoBehaviour
 
         myRigidBody.velocity = direction * runSpeed;
 
+        UpdateAnimator();
+
         // if we reached destination, point to next waypoint
         Collider2D[] objectsAtWaypoint = Physics2D.OverlapCircleAll(nextWaypoint, tolerance);
         if (objectsAtWaypoint.Length > 0)
@@ -125,16 +127,29 @@ public class EnemyBehavior : MonoBehaviour
 
         myRigidBody.velocity = velocity;
 
+        UpdateAnimator();
+        // bool isMovingHorizontal = (velocity.x > Mathf.Epsilon) || (velocity.x < -Mathf.Epsilon);
+        // bool isMovingVertical = (velocity.y > Mathf.Epsilon) || (velocity.y < -Mathf.Epsilon);
+
+        // myAnimator?.SetBool("isWalking", isMovingHorizontal || isMovingVertical);
+        // myAnimator?.SetFloat("xVelocity", velocity.x);
+        // myAnimator?.SetFloat("yVelocity", velocity.y);
+
+        yield return new WaitForSeconds(disappearAfterSeconds);
+
+        Destroy(gameObject);
+    }
+
+    void UpdateAnimator()
+    {
+        Vector2 velocity = myRigidBody.velocity;
+
         bool isMovingHorizontal = (velocity.x > Mathf.Epsilon) || (velocity.x < -Mathf.Epsilon);
         bool isMovingVertical = (velocity.y > Mathf.Epsilon) || (velocity.y < -Mathf.Epsilon);
 
         myAnimator?.SetBool("isWalking", isMovingHorizontal || isMovingVertical);
         myAnimator?.SetFloat("xVelocity", velocity.x);
         myAnimator?.SetFloat("yVelocity", velocity.y);
-
-        yield return new WaitForSeconds(disappearAfterSeconds);
-
-        Destroy(gameObject);
     }
 
     public void Scare(Transform source)

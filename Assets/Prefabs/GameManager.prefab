@@ -125,8 +125,7 @@ MonoBehaviour:
   hintPanel: {fileID: 7361062285465649482}
   hintText: {fileID: 7361062284180234225}
   heartContainer: {fileID: 7361062283743482601}
-  crossFade: {fileID: 7361062284351115146}
-  healthPoints: 11
+  healthPoints: 12
   score: 0
   fullHeartSprite: {fileID: 930588395, guid: 01a848f0b7718fd4a97292a1dc68fe03, type: 3}
   partialHeartSprites:
@@ -313,28 +312,3 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2807322793176580478, guid: 55e80675a5715884f964aa3faf7ceb9c, type: 3}
   m_PrefabInstance: {fileID: 4670833220367577785}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8515003221127446342 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3961333968707636735, guid: 55e80675a5715884f964aa3faf7ceb9c, type: 3}
-  m_PrefabInstance: {fileID: 4670833220367577785}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &7361062284351115146
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8515003221127446342}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 44fc042bc3fc5c94b9ca0c1d67d219c9, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
