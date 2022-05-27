@@ -6,15 +6,20 @@ public class EnemyBehavior : MonoBehaviour
 {
     [SerializeField] bool canScare;
     [SerializeField] float disappearAfterSeconds = 2f;
+    
+    float runSpeed = 5f;
+
     bool isScared;
 
     Rigidbody2D myRigidBody;
     Animator myAnimator;
+    Collider2D myCollider;
 
     private void Awake()
     {
         myRigidBody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
+        myCollider = GetComponent<Collider2D>();
     }
 
     void Update()
@@ -25,9 +30,19 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
-    IEnumerator RunAndDisappear()
+    IEnumerator RunAndDisappear(Transform source)
     {
-        Vector2 velocity = new Vector2(1f, 1f);
+        // get opposite direction from attack
+        Vector2 oppositeDirection = transform.position - source.transform.position;
+
+        // normalize the direction (removes magnitude so that the distance between the two points doesn't matter)
+        oppositeDirection.Normalize();
+
+        // apply speed
+        Vector2 velocity = oppositeDirection * runSpeed;
+
+        // turn collider into a trigger to avoid it bumping into things
+        myCollider.isTrigger = true;
 
         myRigidBody.velocity = velocity;
 
@@ -49,7 +64,7 @@ public class EnemyBehavior : MonoBehaviour
         {
             Debug.Log($"{name} is scared");
             isScared = true;
-            StartCoroutine(RunAndDisappear());
+            StartCoroutine(RunAndDisappear(source));
         }
     }
 }
