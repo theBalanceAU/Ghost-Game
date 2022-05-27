@@ -65,6 +65,7 @@ public class PlayerInteraction : MonoBehaviour
 
     public void PickupObject(GameObject item)
     {
+        Debug.Log($"Pick up: {item.name}");
         throwableObject = item.GetComponent<ThrowableObject>();
 
         if (!throwableObject)
@@ -80,12 +81,12 @@ public class PlayerInteraction : MonoBehaviour
         myAnimator.SetBool("isCarrying", true);
     }
 
-    void DropHeldObject()
-    {
-        throwableObject?.DropObject();
-        throwableObject = null;
-        myAnimator.SetBool("isCarrying", false);
-    }
+    // void DropHeldObject()
+    // {
+    //     throwableObject?.DropObject();
+    //     throwableObject = null;
+    //     myAnimator.SetBool("isCarrying", false);
+    // }
 
     void ThrowHeldObject()
     {

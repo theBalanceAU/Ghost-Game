@@ -21,10 +21,12 @@ public class Interaction : MonoBehaviour
     [SerializeField] bool pickupObject;
     
     PlayerInteraction playerInteraction;
+    BoxCollider2D myCollider;
 
     void Awake()
     {
         playerInteraction = FindObjectOfType<PlayerInteraction>();
+        myCollider = GetComponent<BoxCollider2D>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -81,5 +83,12 @@ public class Interaction : MonoBehaviour
             Debug.Log($"Pickup object {pickup.name}");
             playerInteraction.PickupObject(pickup);
         }
+    }
+
+    public void AllowInteraction(bool allow)
+    {
+        Debug.Log($"AllowInteraction: {name} -> {allow}");
+        gameObject.SetActive(allow);
+        myCollider.enabled = allow;
     }
 }

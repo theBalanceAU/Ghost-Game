@@ -9,7 +9,7 @@ public class ThrowableObject : MonoBehaviour
     CircleCollider2D myCollider;
     Rigidbody2D myRigidBody;
     Animator myAnimator;
-    GameObject interactTrigger;
+    Interaction interaction;
 
     [SerializeField] AudioClip hitSound;
 
@@ -23,35 +23,36 @@ public class ThrowableObject : MonoBehaviour
         myCollider = GetComponent<CircleCollider2D>();
         myRigidBody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
-        
-    }
 
-    private void Start()
-    {
-        interactTrigger = FindObjectOfType<Interaction>()?.gameObject;
+        interaction = GetComponent<Interaction>();
+        if (!interaction)
+        {
+            interaction = GetComponentInChildren<Interaction>();
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        bool hitDetected = false;
         if (isThrown)
         {
             if (other.transform.CompareTag("Wall"))
             {
                 Debug.Log($"{name} hit a wall!");
-                isDestroyed = true;
+                hitDetected = true;
             }
             else if (other.transform.CompareTag("Enemy"))
             {
                 Debug.Log($"{name} hit an enamy ({other.transform.name})!");
-                isDestroyed = true;
+                hitDetected = true;
             }
             else if (other.transform.CompareTag("Pickup"))
             {
                 Debug.Log($"{name} hit another pickup ({other.transform.name})!");
-                isDestroyed = true;
+                hitDetected = true;
             }
 
-            if (isDestroyed)
+            if (hitDetected)
             {
                 StartCoroutine(BreakMe());
             }
@@ -72,40 +73,39 @@ public class ThrowableObject : MonoBehaviour
         Destroy(gameObject);
     }
 
-
-
     public void BindToPlayer(GameObject owner, Transform parent)
     {
+        Debug.Log($"Binding to player: {name}");
         holder = owner;
 
         // move object into a child container of the player
         transform.SetParent(parent);
         transform.localPosition = new Vector2(0f, 0f);
 
-        // disable collider and interaction trigger
+        // disable collider and interaction object while being carried
         myCollider.enabled = false;
-        interactTrigger.SetActive(false);
+        interaction.AllowInteraction(false);
 
-        // change animation state to picked up
+        // change object's animation state to picked up
         myAnimator.SetTrigger("Pickup");
     }
 
-    public void DropObject()
-    {
-        if (!holder)
-            return;
+    // public void DropObject()
+    // {
+    //     if (!holder)
+    //         return;
 
-        Debug.Log($"Dropping: {name}");
+    //     Debug.Log($"Dropping: {name}");
 
-        transform.SetParent(null);
+    //     transform.SetParent(null);
 
-        myCollider.enabled = true;
-        interactTrigger.SetActive(true);
+    //     myCollider.enabled = true;
+    //     interaction.AllowInteraction(true);
 
-        holder = null;
+    //     holder = null;
 
-        // if using this later - make sure to set animation state back to idle as the appearance is slightly different
-    }
+    //     // if using this later - make sure to set animation state back to idle as the appearance is slightly different
+    // }
 
     public void ThrowObject(Vector2 direction, float throwSpeed, float throwDuration)
     {

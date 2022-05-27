@@ -21,8 +21,6 @@ public class EnemyBehavior : MonoBehaviour
     Animator myAnimator;
     Collider2D myCollider;
 
-    //List<Vector2> worldWaypoints;
-
     private void Awake()
     {
         myRigidBody = GetComponent<Rigidbody2D>();
@@ -30,15 +28,6 @@ public class EnemyBehavior : MonoBehaviour
         myCollider = GetComponent<Collider2D>();
 
         initialRuntimePosition = transform.position;
-
-        // if (waypoints != null && waypoints.Count > 0)
-        // {
-        //     worldWaypoints = new List<Vector2>();
-        //     for (int i = 0; i < waypoints.Count; i++)
-        //     {
-        //         worldWaypoints.Add(transform.position + (Vector3)waypoints[i]);
-        //     }
-        // }
     }
 
     void Update()
@@ -60,11 +49,6 @@ public class EnemyBehavior : MonoBehaviour
         
         Vector3 direction = -(transform.position - nextWaypoint);
         direction.Normalize();
-
-        Debug.Log($"index={nextWaypointIndex}");
-        Debug.Log($"position={(Vector2)transform.position}");
-        Debug.Log($"nextWaypoint={(Vector2)nextWaypoint}");
-        Debug.Log($"direction={(Vector2)direction}");
 
         myRigidBody.velocity = direction * runSpeed;
 
@@ -128,12 +112,6 @@ public class EnemyBehavior : MonoBehaviour
         myRigidBody.velocity = velocity;
 
         UpdateAnimator();
-        // bool isMovingHorizontal = (velocity.x > Mathf.Epsilon) || (velocity.x < -Mathf.Epsilon);
-        // bool isMovingVertical = (velocity.y > Mathf.Epsilon) || (velocity.y < -Mathf.Epsilon);
-
-        // myAnimator?.SetBool("isWalking", isMovingHorizontal || isMovingVertical);
-        // myAnimator?.SetFloat("xVelocity", velocity.x);
-        // myAnimator?.SetFloat("yVelocity", velocity.y);
 
         yield return new WaitForSeconds(disappearAfterSeconds);
 
