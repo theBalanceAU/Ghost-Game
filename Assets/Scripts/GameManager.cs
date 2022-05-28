@@ -119,6 +119,10 @@ public class GameManager : MonoBehaviour
         SceneCrossfade crossFade = FindObjectOfType<SceneCrossfade>();
         crossFade?.FadeOut();
 
+        // fade out the background music (if one is present in the current scene)
+        SceneBGM bgm = FindObjectOfType<SceneBGM>();
+        bgm?.FadeOut();
+
         if (delaySceneLoad > 0)
         {
             Debug.Log($"Delay for {delaySceneLoad} seconds");
