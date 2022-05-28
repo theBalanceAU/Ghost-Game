@@ -15,6 +15,11 @@ public class SceneBGM : MonoBehaviour
 
     void Start() {
         audioSource.volume = 0f;
+        FadeIn();
+    }
+
+    public void FadeIn()
+    {
         StartCoroutine(StartFade(fadeInDuration, 1f));
     }
 
