@@ -35,6 +35,9 @@ public class PlayerAttack : MonoBehaviour
 
     void OnFire(InputValue value)
     {
+        if (GameManager.isPaused)
+            return;
+            
         if (timeSinceLastAttack >= attackCooldown)
         {
             ScareAttack();

@@ -45,18 +45,27 @@ public class PlayerMovement : MonoBehaviour
 
     void OnMove(InputValue value)
     {
+        if (GameManager.isPaused)
+            return;
+
         moveInput = isAlive ? value.Get<Vector2>() : Vector2.zero;
     }
 
     void OnPause(InputValue value)
     {
-        Time.timeScale = (Time.timeScale == 0f) ? 1f : 0f;
+        Debug.Log($"OnPause");
 
-        // TODO - pause the game, show pause scene
-        // GameManager.Instance.PauseGame();
-        
-        // -> SceneManager.LoadSceneAsync("PauseScreen", LoadSceneMode.Additive);
-        Debug.Log($"Pause");
+        //toggle pause
+        //Time.timeScale = (Time.timeScale == 0f) ? 1f : 0f;
+
+        if (!GameManager.isPaused)
+        {
+            GameManager.Instance.PauseGame();
+        }
+        else
+        {
+            GameManager.Instance.ResumeGame();
+        }
     }
 
     // Private methods

@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] Sprite fullHeartSprite;
     [SerializeField] Sprite[] partialHeartSprites;
 
+    public static bool isPaused;
+    
     static GameManager instance;
 
     const int healthPointsPerHeart = 4;
@@ -130,5 +132,45 @@ public class GameManager : MonoBehaviour
         }
 
         SceneManager.LoadSceneAsync(sceneName);
+    }
+
+    public void PauseGame()
+    {
+        if (isPaused)
+            return;
+
+        //Time.timeScale = 0f;
+        Pause();
+
+        isPaused = true;
+        SceneManager.LoadSceneAsync("PauseScreen", LoadSceneMode.Additive);
+    }
+
+    public void ResumeGame()
+    {
+        if (!isPaused)
+            return;
+
+        //Time.timeScale = 1f;
+        UnPause();
+        
+        isPaused = false;
+        SceneManager.UnloadSceneAsync("PauseScreen");
+    }
+
+    static void Pause()
+    {
+        SetPause(true);
+    }
+
+    static void UnPause()
+    {
+        SetPause(false);
+    }
+
+    static void SetPause(bool pause)
+    {
+        Time.timeScale = pause ? 0f : 1f;
+        AudioListener.pause = pause;
     }
 }

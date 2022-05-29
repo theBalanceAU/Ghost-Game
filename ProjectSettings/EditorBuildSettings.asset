@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 1cb84bfc652b204488145cfc9a94b3a6
   - enabled: 1
+    path: Assets/Scenes/PauseScreen.unity
+    guid: 96f18c24d2c92464aac36fab13284e7c
+  - enabled: 1
     path: Assets/Scenes/Overworld.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
