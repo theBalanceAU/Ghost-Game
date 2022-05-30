@@ -35,3 +35,20 @@ https://opengameart.org/content/next-to-you
 Mysterious Ambience (song21) by pixelsphere.org (cynicmusic)
 https://opengameart.org/content/mysterious-ambience-song21
 
+### SFX
+
+"Misc SFX Pack" by Timopy
+https://opengameart.org/content/misc-sfx-pack
+
+"Glass Breaking 1" by SoundGator 
+https://www.soundgator.com/product/1962-glass-breaking-01-sound-effect/
+
+"Fantozzi's Footsteps (Grass/Sand & Stone)" by Fantozzi
+https://opengameart.org/content/fantozzis-footsteps-grasssand-stone
+
+Waterfall from "NHFEA: Sound" by Roars Games
+https://opengameart.org/content/nhfea-sound
+
+"Door Open, Door Close Set" by Iwan 'qubodup' Gabovitch <qubodup@gmail.com>
+https://opengameart.org/content/door-open-door-close-set
+
