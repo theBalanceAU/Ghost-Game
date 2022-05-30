@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject hintPanel;
     [SerializeField] TextMeshProUGUI hintText;
     [SerializeField] GameObject heartContainer;
+    [SerializeField] GameObject playerHUD;
 
     // each full heart container equals 4 health points
     [SerializeField] int healthPoints;
@@ -112,10 +113,15 @@ public class GameManager : MonoBehaviour
 
     public void ChangeScene(string sceneName, float delaySceneLoad)
     {
-        StartCoroutine(ChangeSceneCo(sceneName, delaySceneLoad));
+        ChangeScene(sceneName, delaySceneLoad, true);
     }
 
-    IEnumerator ChangeSceneCo(string sceneName, float delaySceneLoad)
+    public void ChangeScene(string sceneName, float delaySceneLoad, bool enableHUD)
+    {
+        StartCoroutine(ChangeSceneCo(sceneName, delaySceneLoad, enableHUD));
+    }
+
+    IEnumerator ChangeSceneCo(string sceneName, float delaySceneLoad, bool enableHUD)
     {
         // play crossfade animation (if one is present in the current scene)
         SceneCrossfade crossFade = FindObjectOfType<SceneCrossfade>();
@@ -130,6 +136,10 @@ public class GameManager : MonoBehaviour
             Debug.Log($"Delay for {delaySceneLoad} seconds");
             yield return new WaitForSeconds(delaySceneLoad);
         }
+
+        // enable or disable the player HUD canvas
+        if (playerHUD.activeInHierarchy != enableHUD)
+            playerHUD.SetActive(enableHUD);
 
         SceneManager.LoadSceneAsync(sceneName);
     }

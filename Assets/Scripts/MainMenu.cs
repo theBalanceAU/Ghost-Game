@@ -7,8 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     public void Start_OnClick()
     {
-        GameManager.Instance.ChangeScene("Overworld", 2f);
-        //SceneManager.LoadScene("Overworld");
+        GameManager.Instance.ChangeScene("Overworld", 2f, true);
     }
 
     public void Quit_OnClick()

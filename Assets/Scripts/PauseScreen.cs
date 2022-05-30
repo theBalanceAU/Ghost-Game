@@ -13,6 +13,6 @@ public class PauseScreen : MonoBehaviour
     public void MainMenu_OnClick()
     {
         GameManager.Instance.ResumeGame();
-        GameManager.Instance.ChangeScene("MainMenu", 2f);
+        GameManager.Instance.ChangeScene("MainMenu", 2f, false);
     }
 }

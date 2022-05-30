@@ -125,6 +125,7 @@ MonoBehaviour:
   hintPanel: {fileID: 7361062285465649482}
   hintText: {fileID: 7361062284180234225}
   heartContainer: {fileID: 7361062283743482601}
+  playerHUD: {fileID: 7361062285759984579}
   healthPoints: 12
   score: 0
   fullHeartSprite: {fileID: 930588395, guid: 01a848f0b7718fd4a97292a1dc68fe03, type: 3}
@@ -345,6 +346,11 @@ MonoBehaviour:
 --- !u!1 &7361062285465649482 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2807322793688888307, guid: 55e80675a5715884f964aa3faf7ceb9c, type: 3}
+  m_PrefabInstance: {fileID: 4670833220367577785}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7361062285759984579 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2807322793176580474, guid: 55e80675a5715884f964aa3faf7ceb9c, type: 3}
   m_PrefabInstance: {fileID: 4670833220367577785}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &7361062285759984583 stripped
